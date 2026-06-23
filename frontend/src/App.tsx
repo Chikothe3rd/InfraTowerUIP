@@ -6,25 +6,31 @@ import { useAuthStore } from './store/auth-store'
 import DashboardLayout from './layouts/DashboardLayout'
 import { AuthGuard, RoleGuard } from './components/RoleGuard'
 
-// Lazy Loaded Pages
-const LoginPage = lazy(() => import('./pages/LoginPage'))
-const GlobalDashboard = lazy(() => import('./pages/GlobalDashboard'))
-const TowerDetail = lazy(() => import('./pages/TowerDetail'))
-const NocOperations = lazy(() => import('./pages/NocOperations'))
-const PowerOperations = lazy(() => import('./pages/PowerOperations'))
-const FuelOperations = lazy(() => import('./pages/FuelOperations'))
-const FuelSecurity = lazy(() => import('./pages/FuelSecurity'))
-const SensorOperations = lazy(() => import('./pages/SensorOperations'))
-const CommercialHub = lazy(() => import('./pages/CommercialHub'))
-const AnalyticsReporting = lazy(() => import('./pages/AnalyticsReporting'))
-const AuditLogPage = lazy(() => import('./pages/AuditLogPage'))
+// Eagerly Imported Pages for Instant Navigation
+import LoginPage from './pages/LoginPage'
+import GlobalDashboard from './pages/GlobalDashboard'
+import TowerDetail from './pages/TowerDetail'
+import NocOperations from './pages/NocOperations'
+import PowerOperations from './pages/PowerOperations'
+import FuelOperations from './pages/FuelOperations'
+import FuelSecurity from './pages/FuelSecurity'
+import SensorOperations from './pages/SensorOperations'
+import CommercialHub from './pages/CommercialHub'
+import AnalyticsReporting from './pages/AnalyticsReporting'
+import AuditLogPage from './pages/AuditLogPage'
 
-// Loading Fallback Component
+// Loading Fallback Component (with Branded Logo without tower)
 const PageLoader = () => (
-  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', width: '100%', backgroundColor: 'var(--bg-primary)', color: 'var(--text-secondary)' }}>
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px' }}>
-      <div style={{ width: '40px', height: '40px', borderRadius: '50%', border: '3px solid var(--border-subtle)', borderTopColor: 'var(--accent-primary)', animation: 'spin 1s linear infinite' }}></div>
-      <span style={{ fontSize: '12px', fontWeight: 'bold', letterSpacing: '0.1em' }}>LOADING MODULE...</span>
+  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', width: '100%', backgroundColor: 'var(--bg-primary)' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
+      <svg viewBox="0 0 240 60" width="160" height="40" xmlns="http://www.w3.org/2000/svg">
+        <text x="10" y="34" fontFamily="'Lato', 'Inter', system-ui, sans-serif" fontSize="26" fontWeight="900" fill="#FFFFFF" letterSpacing="0.03em">
+          Infra<tspan fill="rgba(255,255,255,0.65)" fontWeight="300">Tower</tspan><tspan fill="#3B82F6" fontWeight="900">UIP</tspan>
+        </text>
+        <path d="M 18,42 Q 105,55 194,40" fill="none" stroke="#3B82F6" strokeWidth="2.5" strokeLinecap="round" />
+        <path d="M 188,34 L 196,40 L 189,46" fill="none" stroke="#3B82F6" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+      <div style={{ width: '28px', height: '28px', borderRadius: '50%', border: '2.5px solid var(--border-subtle)', borderTopColor: 'var(--accent-primary)', animation: 'spin 1s linear infinite' }}></div>
     </div>
   </div>
 )

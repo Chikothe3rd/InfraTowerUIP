@@ -50,34 +50,8 @@ export default function LoginPage() {
         
         {/* Amazon-style Tech Logo Header */}
         <div style={styles.logoContainer}>
-          {/* Custom pulsing network tower SVG */}
-          <svg viewBox="0 0 48 48" width="56" height="56" xmlns="http://www.w3.org/2000/svg" style={{ marginBottom: '8px' }}>
-            <defs>
-              <radialGradient id="peakPulse" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stopColor="#3B82F6" stopOpacity="1" />
-                <stop offset="100%" stopColor="#3B82F6" stopOpacity="0" />
-              </radialGradient>
-            </defs>
-            <circle cx="24" cy="12" r="10" fill="none" stroke="#3B82F6" strokeWidth="1" strokeDasharray="3,3" opacity="0.6">
-              <animate attributeName="r" values="8;14;8" dur="4s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="24" cy="12" r="16" fill="none" stroke="#3B82F6" strokeWidth="0.75" strokeDasharray="4,4" opacity="0.3">
-              <animate attributeName="r" values="12;20;12" dur="5s" repeatCount="indefinite" />
-            </circle>
-            <line x1="24" y1="12" x2="13" y2="42" stroke="#E2E8F0" strokeWidth="2" strokeLinecap="round" />
-            <line x1="24" y1="12" x2="35" y2="42" stroke="#E2E8F0" strokeWidth="2" strokeLinecap="round" />
-            <line x1="13" y1="42" x2="35" y2="42" stroke="#E2E8F0" strokeWidth="1.5" strokeLinecap="round" />
-            <line x1="18" y1="28" x2="30" y2="28" stroke="#8899B4" strokeWidth="1.5" strokeLinecap="round" />
-            <line x1="18" y1="28" x2="24" y2="12" stroke="#8899B4" strokeWidth="1" />
-            <line x1="30" y1="28" x2="24" y2="12" stroke="#8899B4" strokeWidth="1" />
-            <circle cx="24" cy="12" r="6" fill="url(#peakPulse)" />
-            <circle cx="24" cy="12" r="2.5" fill="#E2E8F0" />
-            <circle cx="13" cy="42" r="3" fill="#0B1929" stroke="#E2E8F0" strokeWidth="1.5" />
-            <circle cx="35" cy="42" r="3" fill="#0B1929" stroke="#E2E8F0" strokeWidth="1.5" />
-          </svg>
-          
           {/* Custom wordmark with Amazon-style Swoop Connection Arrow */}
-          <svg viewBox="0 0 240 60" width="210" height="50" xmlns="http://www.w3.org/2000/svg">
+          <svg viewBox="0 0 240 60" width="210" height="50" xmlns="http://www.w3.org/2000/svg" style={{ marginBottom: '12px' }}>
             <text x="14" y="34" fontFamily="'Lato', 'Inter', system-ui, sans-serif" fontSize="26" fontWeight="900" fill="#F8FAFC" letterSpacing="0.03em">
               Infra<tspan fill="#8899B4" fontWeight="300">Tower</tspan><tspan fill="#3B82F6" fontWeight="900">UIP</tspan>
             </text>
