@@ -1,0 +1,72 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: infratel_db
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-infratel}
+      POSTGRES_USER: ${POSTGRES_USER:-infratel}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-infratel_secret}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: infratel_backend
+    ports:
+      - "3001:3001"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-infratel}:${POSTGRES_PASSWORD:-infratel_secret}@db:5432/${POSTGRES_DB:-infratel}
+      PORT: 3001
+      JWT_SECRET: ${JWT_SECRET:-infratel_secret_token_2026}
+      NODE_ENV: development
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+
+  intelligence:
+    build:
+      context: ./intelligence
+      dockerfile: Dockerfile
+    container_name: infratel_intelligence
+    depends_on:
+      db:
+        condition: service_healthy
+      backend:
+        condition: service_started
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-infratel}:${POSTGRES_PASSWORD:-infratel_secret}@db:5432/${POSTGRES_DB:-infratel}
+      BACKEND_URL: http://backend:3001
+    volumes:
+      - ./intelligence:/app
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: infratel_frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    environment:
+      VITE_API_URL: http://localhost:3001
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+
+volumes:
+  pgdata:

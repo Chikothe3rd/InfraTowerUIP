@@ -1,0 +1,9 @@
+{
+  "python.defaultInterpreterPath": "C:\\Program Files\\PostgreSQL\\17\\pgAdmin 4\\python\\python.exe",
+  "python.analysis.extraPaths": [
+    "C:\\Program Files\\PostgreSQL\\17\\pgAdmin 4\\python\\Lib\\site-packages"
+  ],
+  "python.autoComplete.extraPaths": [
+    "C:\\Program Files\\PostgreSQL\\17\\pgAdmin 4\\python\\Lib\\site-packages"
+  ]
+}
